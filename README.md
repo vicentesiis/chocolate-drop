@@ -1,149 +1,342 @@
-# 🏬 relivator • next.js ecommerce starter
+# ChocolateDrop - Project Documentation
 
-[demo](https://relivator.com) — [sponsor](https://github.com/sponsors/blefnk) — [discord](https://discord.gg/Pb8uKbwpsJ) — [github](https://github.com/blefnk/relivator) — [docs](https://deepwiki.com/blefnk/relivator-nextjs-template)
+## 🍫 Overview
 
-> **relivator** is a robust ecommerce template built with next.js and other modern technologies. it's designed for developers who want a fast, modern, and scalable foundation without reinventing the backend.
+**ChocolateDrop** is a modern e-commerce platform specifically designed for selling artisanal chocolates online. Built on the robust Relivator Next.js template, it combines a sleek storefront with comprehensive business management tools.
 
-## stack
+### Product Description
 
-1. 🧱 **core**: [nextjs 15.3](https://nextjs.org) + [react 19.1](https://react.dev) + [ts 5.8](https://typescriptlang.org)
-2. 🎨 **ui**: [tailwind 4.1](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
-3. 🔒 **auth**: [better-auth](https://better-auth.com)
-4. 🎬 **anims**: [animejs](https://animejs.com)
-5. 📦 **storage**: [uploadthing](https://uploadthing.com)
-6. 📊 **analytics**: [vercel](https://vercel.com/docs/analytics)
-7. 🧬 **db**: [drizzle-orm](https://orm.drizzle.team) ([pg](https://neon.tech/postgresql/tutorial)) + [neon](https://neon.tech)/(🤔🔜)[supabase](https://supabase.com)
-8. 🏗️ **dx**: [eslint](https://eslint.org) + [biome](https://biomejs.dev) + [knip](https://knip.dev)
-9. 📝 **forms**: [react-form](https://tanstack.com/form) _(🔜 w.i.p)_ + [arktype](https://arktype.io)
-10. 📅 **tables**: [react-table](https://tanstack.com/table)
-11. 🌐 **i18n**: [next-intl](https://next-intl.dev) _(🔜 w.i.p)_
-12. 💌 **email**: [resend](https://resend.com) _(🔜 w.i.p)_
-13. 💳 **payments**: [polar](https://polar.sh)
-14. 🔑 **api**: [orpc](https://orpc.unnoq.com) _(🔜 w.i.p)_
+*"ChocolateDrop — Productos artesanales de chocolate"* - An e-commerce platform and presentational website for artisanal chocolate brands, with the tagline "Store which makes you happy."
 
-> these features define the main reliverse stack. for an alternative setup—featuring clerk, stripe, trpc, and more—check out [versator](https://github.com/blefnk/versator).
+## 🏗️ Architecture & Technology Stack
 
-## quick start
+### Core Framework
 
-1. install [git](https://git-scm.com), [node.js](https://nodejs.org), [bun](https://bun.sh).
-2. run:
+- **Frontend**: Next.js 15.3 with React 19.1
+- **Language**: TypeScript 5.8
+- **Styling**: Tailwind CSS 4.1 + shadcn/ui components
+- **Runtime**: Bun (package manager and runtime)
 
-   ```bash
-   git clone https://github.com/blefnk/relivator.git
-   cd relivator
-   bun install
-   copy .env.example .env
-   ```
+### Backend & Database
 
-3. fill in the required environment variables in the `.env` file.
-4. optionally, edit the `src/app.ts` file to make the app yours.
-5. run:
+- **Database**: PostgreSQL with Drizzle ORM
+- **Hosting**: Neon Database (with Supabase as alternative)
+- **Schema Management**: Drizzle Kit for migrations
 
-   ```bash
-   bun db:push # populate db with schema
-   bun dev # start development server
-   bun run build # build production version
-   ```
+### Authentication & Security
 
-6. edit something in the code manually or ask ai to help you.
-7. done. seriously. you're building now.
+- **Auth System**: Better Auth with multi-provider support
+- **Providers**: Google OAuth, GitHub OAuth
+- **Features**:
+  - Multi-factor authentication (MFA)
+  - Session management
+  - Email verification
+  - Two-factor authentication with backup codes
 
-<!-- 
-2. run:
-   ```bash
-   bun i -g @reliverse/cli
-   reliverse cli
-   ```
-3. select **"create a new project"**.
-4. follow prompts to configure your store.
--->
+### Payment Processing
 
-### commands
+- **Provider**: Polar.sh integration
+- **Features**:
+  - Subscription management
+  - Customer portal
+  - Webhook handling
+  - Automatic customer creation
 
-| command         | description                    |
-|-----------------|--------------------------------|
-| `bun dev`       | start local development        |
-| `bun build`     | create a production build      |
-| `bun latest`    | install latest deps            |
-| `bun ui`        | add shadcn components          |
-| `bun db:push`   | apply db schema changes        |
-| `bun db:auth`   | update auth-related tables     |
-| `bun db:studio` | open visual db editor          |
+### File Management
 
-## polar integration
+- **Service**: UploadThing
+- **Features**: Secure file uploads with URL-based uploads
 
-relivator now integrates with [polar](https://polar.sh) for payment processing and subscription management.
+### Additional Integrations
 
-### features
+- **Analytics**: Vercel Speed Insights
+- **Animations**: Anime.js + Framer Motion
+- **Forms**: TanStack React Form (with ArkType validation - WIP)
+- **Tables**: TanStack React Table
+- **Notifications**: Sonner toast notifications
+- **Themes**: Next Themes with system preference support
 
-- checkout flow for subscription purchases
-- customer portal for managing subscriptions
-- webhook handling for subscription events
-- automatic customer creation on signup
-- integration with better-auth for seamless authentication
+## 📁 Project Structure
 
-### setup instructions
+```
+chocolatedrop/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (auth)/            # Authentication pages
+│   │   ├── admin/             # Admin dashboard
+│   │   ├── dashboard/         # User dashboard
+│   │   ├── api/               # API routes
+│   │   └── products/          # Product pages
+│   ├── db/                    # Database schema & config
+│   │   └── schema/            # Drizzle schemas
+│   │       ├── users/         # User-related tables
+│   │       ├── payments/      # Payment & subscription tables
+│   │       └── uploads/       # File upload tables
+│   ├── lib/                   # Utilities & configurations
+│   │   ├── hooks/             # React hooks
+│   │   └── queries/           # Database queries
+│   └── ui/                    # UI components
+│       ├── components/        # Business components
+│       └── primitives/        # Base UI primitives
+├── public/                    # Static assets
+└── .tests/                    # Test files
+```
 
-1. create an account on [polar](https://polar.sh)
-2. create an organization and get an organization access token
-3. configure your environment variables in `.env`:
-   ```
-   POLAR_ACCESS_TOKEN="your_access_token"
-   POLAR_WEBHOOK_SECRET="your_webhook_secret"
-   POLAR_ENVIRONMENT="production" # or "sandbox" for testing
-   ```
-4. create products in the polar dashboard
-5. update the product IDs in `src/lib/auth.ts` to match your polar products:
-   ```typescript
-   checkout: {
-     enabled: true,
-     products: [
-       {
-         productId: "your-product-id", // Replace with actual product ID from Polar Dashboard
-         slug: "pro" // Custom slug for easy reference in Checkout URL
-       }
-     ]
-   }
-   ```
-6. run `bun db:push` to create the necessary database tables
-7. start the application with `bun dev`
+## 🗄️ Database Schema
 
-### verification
+### User Management
 
-to verify that the integration is working:
+- **Users Table**: Core user information with profile data
+- **Sessions Table**: Active user sessions with device tracking
+- **Accounts Table**: OAuth provider accounts
+- **Verification Table**: Email verification tokens
+- **Two Factor Table**: MFA secrets and backup codes
 
-1. sign up for an account
-2. navigate to the dashboard billing page (`/dashboard/billing`)
-3. try subscribing to a plan
-4. check that your subscription appears in the billing dashboard
-5. test the customer portal by clicking "manage subscription"
+### Payment System
 
-### api routes
+- **Polar Customer Table**: Links users to Polar customers
+- **Polar Subscription Table**: Manages subscription states and products
 
-the following api routes are available for payment processing:
+### File Management
 
-- `/api/payments/customer-state` - get the current customer state
-- `/api/payments/subscriptions` - get user subscriptions
+- **Uploads Table**: Tracks uploaded files and metadata
 
-## notes
+## 🔧 Configuration
 
-- relivator 1.4.0+ is ai-ready — optimized for ai-powered ides like cursor, making onboarding effortless even for beginners.
-- version 1.3.0 evolved into versator, featuring [clerk](https://clerk.com) authentication and [stripe](https://stripe.com) payments. explore [versator demo](https://versator.relivator.com/en), [repo](https://github.com/blefnk/versator), or [docs](https://docs.reliverse.org/versator).
+### Environment Variables
 
-## stand with ukraine
+```env
+# App Configuration
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXT_SERVER_APP_URL="http://localhost:3000"
 
-- 💙 help fund drones, medkits, and victory.
-- 💛 every dollar helps stop [russia's war crimes](https://war.ukraine.ua/russia-war-crimes) and saves lives.
-- ‼️ please, [donate now](https://u24.gov.ua), it matters.
+# Database
+DATABASE_URL="postgresql://..."
 
-## stand with reliverse
+# Authentication
+AUTH_SECRET="..."
+AUTH_GOOGLE_ID="..."
+AUTH_GOOGLE_SECRET="..."
+AUTH_GITHUB_ID="..."
+AUTH_GITHUB_SECRET="..."
 
-- ⭐ [star the repo](https://github.com/blefnk/relivator) to help the reliverse community grow.
-- 😉 follow this project's author, [nazar kornienko](https://github.com/blefnk) and his [reliverse](https://github.com/reliverse) ecosystem, to get updates about new projects faster.
-- 🦄 [become a sponsor](https://github.com/sponsors/blefnk) and power the next wave of tools that _just feel right_.
+# File Uploads
+UPLOADTHING_TOKEN="..."
+UPLOADTHING_SECRET_KEY="..."
 
-> every bit of support helps keep the dream alive: dev tools that don't suck.
+# Payments
+POLAR_ACCESS_TOKEN="..."
+POLAR_WEBHOOK_SECRET="..."
+POLAR_ENVIRONMENT="production"
+```
 
-## license
+### App Configuration (`src/app.ts`)
 
-mit © 2025 [nazar kornienko (blefnk)](https://github.com/blefnk), [reliverse](https://github.com/reliverse)
+```typescript
+export const SEO_CONFIG = {
+  fullName: "ChocolateDrop — Productos artesanales de chocolate",
+  name: "ChocolateDrop",
+  slogan: "Store which makes you happy.",
+};
+
+export const SYSTEM_CONFIG = {
+  redirectAfterSignIn: "/dashboard/uploads",
+  redirectAfterSignUp: "/dashboard/uploads",
+  repoName: "chocolatedrop",
+  repoOwner: "blefnk",
+  repoStars: true,
+};
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Bun package manager
+- PostgreSQL database (Neon recommended)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd chocolatedrop
+
+# Install dependencies
+bun install
+
+# Setup environment
+cp .env.example .env
+# Edit .env with your credentials
+
+# Setup database
+bun db:push
+
+# Start development server
+bun dev
+```
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development server with Turbopack |
+| `bun build` | Create production build |
+| `bun db:push` | Apply database schema changes |
+| `bun db:studio` | Open Drizzle Studio (visual DB editor) |
+| `bun db:auth` | Update auth-related tables |
+| `bun ui` | Add shadcn/ui components |
+| `bun latest` | Update all dependencies |
+| `bun check` | Run TypeScript, ESLint, Biome, and Knip |
+| `bun tests` | Run test suite |
+
+## 🎨 Features
+
+### Customer-Facing Features
+
+- **Product Catalog**: Browse artisanal chocolate products
+- **Shopping Cart**: Add/remove items with persistent state
+- **User Authentication**: Sign up/in with Google or GitHub
+- **Product Search & Filtering**: Find products easily
+- **Responsive Design**: Mobile-first approach
+- **Dark/Light Theme**: System preference support
+
+### Business Features
+
+- **Admin Dashboard**: Manage products and orders
+- **User Management**: View and manage customers
+- **Upload Management**: Handle product images and files
+- **Subscription Billing**: Polar.sh integration for recurring payments
+- **Analytics**: Built-in performance monitoring
+
+### Developer Features
+
+- **Type Safety**: Full TypeScript coverage
+- **Code Quality**: ESLint, Biome, and Knip integration
+- **Modern Tooling**: Latest Next.js with App Router
+- **Database Management**: Drizzle ORM with migrations
+- **Testing**: Bun test runner
+
+## 🔐 Authentication Flow
+
+1. **Sign Up/In**: Users can register or login using:
+   - Google OAuth
+   - GitHub OAuth
+   - Email/password (with Better Auth)
+
+2. **Multi-Factor Authentication**: Optional MFA with:
+   - TOTP (Time-based One-Time Password)
+   - Backup codes for recovery
+
+3. **Session Management**: Secure session handling with:
+   - Device tracking
+   - IP address logging
+   - Automatic session cleanup
+
+## 💳 Payment Integration
+
+### Polar.sh Setup
+
+1. Create Polar account and organization
+2. Configure webhook endpoints
+3. Set up products in Polar dashboard
+4. Update product IDs in `src/lib/auth.ts`
+
+### Subscription Flow
+
+1. User selects subscription plan
+2. Redirected to Polar checkout
+3. Webhook confirms payment
+4. User gains access to premium features
+
+## 🎯 Target Audience
+
+### Primary Users
+
+- **Chocolate Artisans**: Small to medium chocolate makers
+- **Gourmet Food Retailers**: Specialty food stores
+- **Direct-to-Consumer Brands**: Chocolate brands selling online
+
+### Use Cases
+
+- Online chocolate store
+- Subscription box service
+- Wholesale chocolate platform
+- Brand showcase website
+
+## 🔄 Development Workflow
+
+### Code Quality
+
+- **Linting**: ESLint with React and TypeScript rules
+- **Formatting**: Biome for consistent code style
+- **Dead Code**: Knip for unused code detection
+- **Type Checking**: Strict TypeScript configuration
+
+### Database Workflow
+
+1. Modify schema in `src/db/schema/`
+2. Run `bun db:push` to apply changes
+3. Use `bun db:studio` for visual inspection
+
+### Component Development
+
+- Use shadcn/ui primitives as base
+- Create business components in `src/ui/components/`
+- Follow atomic design principles
+
+## 🚀 Deployment
+
+### Recommended Platforms
+
+- **Vercel**: Optimized for Next.js (recommended)
+- **Netlify**: Alternative with good Next.js support
+- **Railway**: Full-stack deployment option
+
+### Environment Setup
+
+1. Set production environment variables
+2. Configure database connection
+3. Set up OAuth providers for production domains
+4. Configure Polar webhooks for production
+
+### Performance Optimizations
+
+- Built-in Vercel Speed Insights
+- Image optimization with Next.js
+- Automatic code splitting
+- Server-side rendering where appropriate
+
+## 📈 Future Roadmap
+
+### Planned Features (Work in Progress)
+
+- **Internationalization**: next-intl integration
+- **Email System**: Resend integration for transactional emails
+- **Advanced Forms**: Enhanced form validation with ArkType
+- **API Layer**: ORPC integration for type-safe APIs
+
+### Potential Enhancements
+
+- **Inventory Management**: Stock tracking and alerts
+- **Order Management**: Advanced order processing
+- **Customer Reviews**: Product rating system
+- **Marketing Tools**: Discount codes and promotions
+- **Mobile App**: React Native companion app
+
+## 🤝 Contributing
+
+### Development Setup
+
+1. Fork the repository
+2. Create feature branch
+3. Follow code quality standards
+4. Submit pull request with tests
+
+### Code Standards
+
+- Use TypeScript for all new code
+- Follow existing component patterns
+- Add tests for new features
+- Update documentation as needed
